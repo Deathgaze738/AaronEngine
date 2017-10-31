@@ -43,7 +43,7 @@ public class WarpSystem extends GameSystemBase{
 		List<Class<? extends Component>> cList3 = new ArrayList<Class<? extends Component>>();
 		cList2.add(TileMapComponent.class);
 		addRequirements(req, cList3);
-		SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\door.wav", "door");
+		SoundManager.getInstance().addClip("Resources\\Sounds\\door.wav", "door");
 	}
 
 	@Override

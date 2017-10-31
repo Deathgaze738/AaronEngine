@@ -37,7 +37,6 @@ import aaron.game.pokemonatb.manager.KeyManager;
 import aaron.game.pokemonatb.manager.ResourceManager;
 import aaron.game.pokemonatb.manager.SoundManager;
 import aaron.game.pokemonatb.manager.SystemManager;
-import aaron.game.pokemonatb.map.GameMap;
 import aaron.game.pokemonatb.system.AnimationSystem;
 import aaron.game.pokemonatb.system.CameraSystem;
 import aaron.game.pokemonatb.system.CollisionSystem;
@@ -63,8 +62,8 @@ public class MainGameState extends BaseGameState {
 	private int cameraY = 15;
 	private int cameraSize = 17;
 	
-	private int xTile = (int) ((cameraX  * GameMap.TILE_SIZE) + (Math.ceil((cameraSize * GameMap.TILE_SIZE)/2))) - GameMap.TILE_SIZE/2;
-	private int yTile = (int) ((cameraY  * GameMap.TILE_SIZE) + (Math.ceil((cameraSize * GameMap.TILE_SIZE)/2))) - GameMap.TILE_SIZE/2;
+	private int xTile = (int) ((cameraX  * 16) + (Math.ceil((cameraSize * 16)/2))) - 16/2;
+	private int yTile = (int) ((cameraY  * 16) + (Math.ceil((cameraSize * 16)/2))) - 16/2;
 	
 	
 	public MainGameState(GameStateManager mSm) {
@@ -122,7 +121,7 @@ public class MainGameState extends BaseGameState {
 		engine.addSystem(cs, 7);
 		engine.addSystem(ws, 3);
 		engine.addSystem(is, 8);
-		SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\pallet_town.wav", "music");
+		SoundManager.getInstance().addClip("Resources\\Sounds\\pallet_town.wav", "music");
 		SoundManager.getInstance().playClip("music", SoundManager.LOOP);
 	}
 	
@@ -168,18 +167,18 @@ public class MainGameState extends BaseGameState {
 		characterEnt.add(new InputComponent());
 		characterEnt.add(new TransformComponent(xTile, yTile));
 		int animationTime = 8;
-		String animationSheet = "C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\character.png";
+		String animationSheet = "Resources\\Images\\character.png";
 		AnimationComponent animation = new AnimationComponent(animationTime);
-		animation.addAnimationState(State.WALKING, 0, rm.getAnimation(animationSheet, new int[]{9, 8, 10, 8}, 1));
-		animation.addAnimationState(State.WALKING, 90, rm.getAnimation(animationSheet, new int[]{2, 1}, 1));
-		animation.addAnimationState(State.WALKING, 180, rm.getAnimation(animationSheet, new int[]{6, 5, 7, 5}, 1));
-		animation.addAnimationState(State.WALKING, 270, rm.getAnimation(animationSheet, new int[]{4, 3}, 1));
-		animation.addAnimationState(State.IDLE, 0, rm.getAnimation(animationSheet, new int[]{8}, 1));
-		animation.addAnimationState(State.IDLE, 90, rm.getAnimation(animationSheet, new int[]{1}, 1));
-		animation.addAnimationState(State.IDLE, 180, rm.getAnimation(animationSheet, new int[]{5}, 1));
-		animation.addAnimationState(State.IDLE, 270, rm.getAnimation(animationSheet, new int[]{3}, 1));
+		animation.addAnimationState(State.WALKING, 0, rm.getAnimation(animationSheet, new int[]{9, 8, 10, 8}, 1, 16));
+		animation.addAnimationState(State.WALKING, 90, rm.getAnimation(animationSheet, new int[]{2, 1}, 1, 16));
+		animation.addAnimationState(State.WALKING, 180, rm.getAnimation(animationSheet, new int[]{6, 5, 7, 5}, 1, 16));
+		animation.addAnimationState(State.WALKING, 270, rm.getAnimation(animationSheet, new int[]{4, 3}, 1, 16));
+		animation.addAnimationState(State.IDLE, 0, rm.getAnimation(animationSheet, new int[]{8}, 1, 16));
+		animation.addAnimationState(State.IDLE, 90, rm.getAnimation(animationSheet, new int[]{1}, 1, 16));
+		animation.addAnimationState(State.IDLE, 180, rm.getAnimation(animationSheet, new int[]{5}, 1, 16));
+		animation.addAnimationState(State.IDLE, 270, rm.getAnimation(animationSheet, new int[]{3}, 1, 16));
 		characterEnt.add(animation);
-		characterEnt.add(new ImageComponent(0, rm.getSprite(animationSheet, 5, 0)));
+		characterEnt.add(new ImageComponent(0, rm.getSprite(animationSheet, 5, 0, 16)));
 		
 		characterEnt.add(getBackpack());
 		
@@ -200,12 +199,12 @@ public class MainGameState extends BaseGameState {
 		characterEnt.add(new TransformComponent(5, 5));
 		characterEnt.add(new RotationComponent(180));
 		characterEnt.add(new StateComponent(State.WALKING));
-		String animationSheet = "C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\character.png";
+		String animationSheet = "Resources\\Images\\character.png";
 		int animationTime = 10;
 		AnimationComponent animation = new AnimationComponent(animationTime);
-		animation.addAnimationState(State.WALKING, 180, rm.getAnimation(animationSheet, new int[]{6, 5, 7, 5}, 1));
+		animation.addAnimationState(State.WALKING, 180, rm.getAnimation(animationSheet, new int[]{6, 5, 7, 5}, 1, 16));
 		characterEnt.add(animation);
-		characterEnt.add(new ImageComponent(0, rm.getSprite(animationSheet, 5, 1)));
+		characterEnt.add(new ImageComponent(0, rm.getSprite(animationSheet, 5, 1, 16)));
 		return characterEnt;
 	}
 

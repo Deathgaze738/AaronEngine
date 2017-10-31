@@ -27,8 +27,8 @@ public class IntroGameState extends BaseGameState{
 		System.out.println("Intro");
 		ticks = 0;
 		try {
-			logo = ResourceManager.getInstance().getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\intro.jpg");
-			SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\start.wav", "intro");
+			logo = ResourceManager.getInstance().getImage("Resources\\Images\\intro.jpg");
+			SoundManager.getInstance().addClip("Resources\\Sounds\\start.wav", "intro");
 			SoundManager.getInstance().playClip("intro", SoundManager.ONCE);
 		}
 		catch(Exception e) {

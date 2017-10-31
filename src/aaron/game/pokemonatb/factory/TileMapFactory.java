@@ -21,7 +21,7 @@ import aaron.game.pokemonatb.map.TileType;
 
 public class TileMapFactory {
 		//Temp Var
-		private static final String basePath = "C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources";
+		private static final String basePath = "Resources";
 		
 		public static TileMapComponent tileMapFromFile(int mapID, int layer, int mapType, int tileSize){
 			//load files

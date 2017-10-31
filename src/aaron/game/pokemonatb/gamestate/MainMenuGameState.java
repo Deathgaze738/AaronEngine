@@ -71,7 +71,7 @@ public class MainMenuGameState extends BaseGameState{
 		System.out.println("MAIN MENU");
 		checkSaveFile();
 		sManager = SoundManager.getInstance();
-		sManager.addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\title.wav", "title");
+		sManager.addClip("Resources\\Sounds\\title.wav", "title");
 		sManager.playClip("title", SoundManager.LOOP);
 		
 		ballY = 160;
@@ -79,14 +79,14 @@ public class MainMenuGameState extends BaseGameState{
 		
 		rManager = ResourceManager.getInstance();
 		try{
-			title = rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\logo.png");
-			mainCharacter = rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\ash_mainMenu.png");
-			pokeball = rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\pokeball.png");
+			title = rManager.getImage("Resources\\Images\\logo.png");
+			mainCharacter = rManager.getImage("Resources\\Images\\ash_mainMenu.png");
+			pokeball = rManager.getImage("Resources\\Images\\pokeball.png");
 			selector = pokeball;
-			scrollingPokemon.add(rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\pikachu.png"));
-			scrollingPokemon.add(rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\charmander.png"));
-			scrollingPokemon.add(rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\squirtle.png"));
-			scrollingPokemon.add(rManager.getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\bulbasaur.png"));
+			scrollingPokemon.add(rManager.getImage("Resources\\Images\\pikachu.png"));
+			scrollingPokemon.add(rManager.getImage("Resources\\Images\\charmander.png"));
+			scrollingPokemon.add(rManager.getImage("Resources\\Images\\squirtle.png"));
+			scrollingPokemon.add(rManager.getImage("Resources\\Images\\bulbasaur.png"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();

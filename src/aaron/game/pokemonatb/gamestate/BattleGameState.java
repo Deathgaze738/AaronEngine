@@ -43,7 +43,7 @@ public class BattleGameState extends BaseGameState{
 	@Override
 	public void initialize() {
 		System.out.println("BATTLE STATE");
-		SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\battle.wav", "battle");
+		SoundManager.getInstance().addClip("Resources\\Sounds\\battle.wav", "battle");
 		SoundManager.getInstance().playClip("battle", SoundManager.LOOP);
 		
 		//BE SURE TO IMPLEMENT A FUCKING BINARY STREAM FORMAT FOR LOADING YOUR SHIT IN BOIIIIIII
@@ -63,8 +63,8 @@ public class BattleGameState extends BaseGameState{
 		
 		List<Component> opponent = new ArrayList<Component>();
 		List<Component> player = new ArrayList<Component>();
-		ImageComponent sOpponent = new ImageComponent(0, ResourceManager.getInstance().getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\charmander.png"), 100, 100);
-		ImageComponent sPlayer = new ImageComponent(0, ResourceManager.getInstance().getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\typhlosion_back.png"), 100, 100);
+		ImageComponent sOpponent = new ImageComponent(0, ResourceManager.getInstance().getImage("Resources\\Images\\charmander.png"), 100, 100);
+		ImageComponent sPlayer = new ImageComponent(0, ResourceManager.getInstance().getImage("Resources\\Images\\typhlosion_back.png"), 100, 100);
 		TransformComponent tOpponent = new TransformComponent(GamePanel.WIDTH, 0);
 		TransformComponent tPlayer = new TransformComponent(-100, GamePanel.HEIGHT - 160);
 		opponent.add(sOpponent);

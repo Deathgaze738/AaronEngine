@@ -36,8 +36,8 @@ public class TextRenderSystem extends GameSystemBase{
 		cList = new ArrayList<Class<? extends Component>>();
 		cList.add(InputComponent.class);
 		addRequirements(SysRequirement.AllOf, cList);
-		SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\sounds\\ding.wav", "ding");
-		textBoxBackground = ResourceManager.getInstance().getImage("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Images\\textbox.png");
+		SoundManager.getInstance().addClip("Resources\\sounds\\ding.wav", "ding");
+		textBoxBackground = ResourceManager.getInstance().getImage("Resources\\Images\\textbox.png");
 		
 	}
 

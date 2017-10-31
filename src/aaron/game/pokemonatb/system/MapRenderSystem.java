@@ -7,9 +7,12 @@ import java.util.List;
 
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
+import aaron.game.pokemonatb.component.ImageComponent;
+import aaron.game.pokemonatb.component.RenderComponent;
+import aaron.game.pokemonatb.component.TileMapComponent;
+import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.main.GamePanel;
-import aaron.game.pokemonatb.map.GameMap;
 import aaron.game.pokemonatb.map.Tile;
 import aaron.game.pokemonatb.map.TileType;
 
@@ -21,35 +24,41 @@ public class MapRenderSystem extends GameSystemBase {
 	private int endYTile;
 	private int startXTile;
 	private int endXTile;
-	
-	GameMap gameMap;
 
-	public MapRenderSystem(ECSEngine engine, GameMap map) {
+	public MapRenderSystem(ECSEngine engine) {
 		super(engine);
-		gameMap = map;
 		SysRequirement req = SysRequirement.AllOf;
 		List<Class<? extends Component>> cList = new ArrayList<Class<? extends Component>>();
 		cList.add(CameraComponent.class);
+		addRequirements(req, cList);
+		cList = new ArrayList<Class<? extends Component>>();
+		cList.add(TileMapComponent.class);
 		addRequirements(req, cList);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void update() {
+		TileMapComponent map = engine.getComponent(getFirstEntity(1), TileMapComponent.class);
+		if(map == null){
+			return;
+		}
+		
 		for(int entity : getEntities(0)){
 			CameraComponent cameraComponent = engine.getComponent(entity, CameraComponent.class);
-			xOff = cameraComponent.xPos % GameMap.TILE_SIZE;
-			yOff = cameraComponent.yPos % GameMap.TILE_SIZE;
-			startXTile = cameraComponent.xPos / GameMap.TILE_SIZE;
-			startYTile = cameraComponent.yPos / GameMap.TILE_SIZE;
-			endXTile = (int) Math.ceil((double)(cameraComponent.xPos + cameraComponent.xSize) / GameMap.TILE_SIZE);
-			endYTile = (int) Math.ceil((double)(cameraComponent.yPos + cameraComponent.ySize) / GameMap.TILE_SIZE);
+			xOff = cameraComponent.xPos % map.tileSize;
+			yOff = cameraComponent.yPos % map.tileSize;
+			startXTile = cameraComponent.xPos / map.tileSize;
+			startYTile = cameraComponent.yPos / map.tileSize;
+			endXTile = (int) Math.ceil((double)(cameraComponent.xPos + cameraComponent.xSize) / map.tileSize);
+			endYTile = (int) Math.ceil((double)(cameraComponent.yPos + cameraComponent.ySize) / map.tileSize);
 		}
-		updateTiles();
+		updateTiles(map);
 	}
 	
 	private void drawMap(Graphics2D g){
-		Tile[][] tiles = gameMap.getTileMap();
+		TileMapComponent map = engine.getComponent(getFirstEntity(1), TileMapComponent.class);
+		Tile[][] tiles = map.tileMap;
 		int x = 0;
 		int y = 0;
 		//g.drawImage(tiles[0][0].getImage(), 0, 0, 16, 16, null);
@@ -57,7 +66,7 @@ public class MapRenderSystem extends GameSystemBase {
 			x = 0;
 			for(int k = startXTile; k < endXTile; k++){
 				try{
-					g.drawImage(tiles[i][k].getImage(), x - xOff, y - yOff, GameMap.TILE_SIZE, GameMap.TILE_SIZE, null);
+					g.drawImage(tiles[i][k].getImage(), x - xOff, y - yOff, map.tileSize, map.tileSize, null);
 					if(tiles[i][k].getType() == TileType.BLOCKED){
 						//g.drawOval(x - xOff, y - yOff, GameMap.TILE_SIZE, GameMap.TILE_SIZE);
 					}
@@ -66,16 +75,16 @@ public class MapRenderSystem extends GameSystemBase {
 				catch(Exception e){
 					//System.out.println("No Tile data");
 				}
-				x = x + GameMap.TILE_SIZE;
+				x = x + map.tileSize;
 			}
-			y = y + GameMap.TILE_SIZE;
+			y = y + map.tileSize;
 		}
 	}
 	
-	private void updateTiles(){
-		Tile[][] tiles = gameMap.getTileMap();
-		for(int i = 0; i < gameMap.getWidth(); i++){
-			for(int k = 0; k < gameMap.getHeight(); k++){
+	private void updateTiles(TileMapComponent gameMap){
+		Tile[][] tiles = gameMap.tileMap;
+		for(int i = 0; i < gameMap.width; i++){
+			for(int k = 0; k < gameMap.height; k++){
 				tiles[i][k].update();
 			}
 		}

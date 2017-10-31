@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="0" tilewidth="16" tileheight="16" tilecount="5185" columns="61">
- <image source="D:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\tilesets\\0.png" width="976" height="1360"/>
+ <image source="C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\tilesets\\0.png" width="976" height="1360"/>
  <tile id="34" type="BLOCKED"/>
  <tile id="96" type="BLOCKED"/>
  <tile id="97" type="BLOCKED">

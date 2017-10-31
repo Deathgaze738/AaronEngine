@@ -7,18 +7,17 @@ import java.util.List;
 
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
+import aaron.game.pokemonatb.component.TileMapComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.component.RenderComponent;
 import aaron.game.pokemonatb.component.ImageComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.main.GamePanel;
 import aaron.game.pokemonatb.manager.EntityManager;
-import aaron.game.pokemonatb.map.GameMap;
 import aaron.game.pokemonatb.map.Tile;
 import aaron.game.pokemonatb.map.TileType;
 
 public class EntityRenderSystem extends GameSystemBase{
-	private GameMap gameMap;
 	
 	//Camera Values
 	private int yPos;
@@ -36,6 +35,9 @@ public class EntityRenderSystem extends GameSystemBase{
 		cList.add(TransformComponent.class);
 		cList.add(ImageComponent.class);
 		cList.add(RenderComponent.class);
+		addRequirements(req, cList);
+		cList = new ArrayList<Class<? extends Component>>();
+		cList.add(TileMapComponent.class);
 		addRequirements(req, cList);
 	}
 
@@ -75,8 +77,8 @@ public class EntityRenderSystem extends GameSystemBase{
 			//System.out.println("No Camera: Using Default Values");
 			yPos = 0;
 			xPos = 0;
-			ySize = 15 * GameMap.TILE_SIZE;
-			xSize = 15 * GameMap.TILE_SIZE;
+			ySize = 15 * 16;
+			xSize = 15 * 16;
 		}
 	}
 }

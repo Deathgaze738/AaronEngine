@@ -28,7 +28,7 @@ public class CollisionSystem extends GameSystemBase {
 		ArrayList<Class<? extends Component>> cList2 = new ArrayList<Class<? extends Component>>();
 		cList.add(TileMapComponent.class);
 		addRequirements(SysRequirement.AllOf, cList2);
-		SoundManager.getInstance().addClip("C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\Sounds\\collision.wav", "collision");
+		SoundManager.getInstance().addClip("Resources\\Sounds\\collision.wav", "collision");
 	}
 
 	@Override
