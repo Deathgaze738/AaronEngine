@@ -2,7 +2,7 @@ package aaron.game.pokemonatb.component;
 
 import aaron.game.pokemonatb.map.Tile;
 
-public class TileMapComponent extends RenderComponent {
+public class TileMapComponent extends Component {
 	
 	public static final int ORTHOGONAL = 1;
 	public static final int ISOMETRIC = 2;
@@ -13,9 +13,9 @@ public class TileMapComponent extends RenderComponent {
 	public int height;
 	public int width;
 	public int tileSize;
+	public int layer;
 
 	public TileMapComponent(int mapid, int layer, int mapType, int tileSize, Tile[][] tileMap, int height, int width){
-		super(layer);
 		this.mapid = mapid;
 		this.mapType = mapType;
 		this.tileMap = tileMap;

@@ -13,7 +13,7 @@ import aaron.game.pokemonatb.component.ActiveComponent;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InteractibleComponent;
-import aaron.game.pokemonatb.component.RenderComponent;
+import aaron.game.pokemonatb.component.RenderableComponent;
 import aaron.game.pokemonatb.component.ImageComponent;
 import aaron.game.pokemonatb.component.TextComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
