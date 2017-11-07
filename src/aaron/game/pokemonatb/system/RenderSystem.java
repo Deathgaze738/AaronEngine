@@ -96,7 +96,9 @@ public class RenderSystem extends GameSystemBase {
 	
 	private void drawImage(ImageComponent imageComp, RenderableComponent renderComp, Graphics2D g){
 		if((renderComp.x) <= mainCamera.xSize && (mainCamera.xPos + imageComp.xSize) >= 0 && (renderComp.y) <= mainCamera.ySize && (mainCamera.yPos + imageComp.ySize) >= 0){
-			g.drawImage(imageComp.sprite, renderComp.x, renderComp.y, imageComp.xSize, imageComp.ySize, null);
+			if(renderComp.active){
+				g.drawImage(imageComp.sprite, renderComp.x, renderComp.y, imageComp.xSize, imageComp.ySize, null);
+			}
 			//System.out.println("DRAWN AT");
 		}
 		//System.out.println("POSITION: " + renderComp.x + " " + renderComp.y);
