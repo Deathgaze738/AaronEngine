@@ -8,6 +8,8 @@ import aaron.game.pokemonatb.gamestate.IntroGameState;
 import aaron.game.pokemonatb.gamestate.MainGameState;
 
 public class GameStateManager {
+	
+	public boolean newStateFlag = false;
  
 	//Possible Game States
 	public static final int NUM_STATES = 8;
@@ -46,11 +48,13 @@ public class GameStateManager {
 	public void pushState(BaseGameState s){
 		stateStack.push(s);
 		stateStack.peek().initialize();
+		newStateFlag = true;
 	}
 	
 	//To remove current state from stack
 	public void endState(){
 		stateStack.pop();
+		newStateFlag = true;
 	}
 	
 	public void update() {
