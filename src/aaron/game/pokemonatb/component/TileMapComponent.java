@@ -13,9 +13,8 @@ public class TileMapComponent extends Component {
 	public int height;
 	public int width;
 	public int tileSize;
-	public int layer;
 
-	public TileMapComponent(int mapid, int layer, int mapType, int tileSize, Tile[][] tileMap, int height, int width){
+	public TileMapComponent(int mapid, int mapType, int tileSize, Tile[][] tileMap, int height, int width){
 		this.mapid = mapid;
 		this.mapType = mapType;
 		this.tileMap = tileMap;

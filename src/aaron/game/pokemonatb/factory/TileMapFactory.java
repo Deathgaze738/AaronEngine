@@ -79,7 +79,8 @@ public class TileMapFactory {
 					}
 				}
 				//System.out.println("Total Memory Usage: " + Double.toString((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000.0));
-				return new TileMapComponent(mapID, layer, mapType, tileSize, tileMap, height, width);
+				printMap(tileMap, width, height);
+				return new TileMapComponent(mapID, mapType, tileSize, tileMap, height, width);
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -88,20 +89,12 @@ public class TileMapFactory {
 		}
 		
 		private static Tile getTile(int gid, NodeList tileset, int firstgid, String imageSource, int tileSize){
-			int encounterRate = 0;
 			ResourceManager rsm = ResourceManager.getInstance();
 			TileType type = TileType.WALKING;
 			for (int temp = 0; temp < tileset.getLength(); temp++) {
 				Element tile = (Element) tileset.item(temp);
 				if(Integer.parseInt(tile.getAttribute("id")) == gid){
 					type = TileType.valueOf(tile.getAttribute("type"));
-					NodeList properties = tile.getElementsByTagName("property");
-					for (int k = 0; k < properties.getLength(); k++) {
-						Element property = (Element) properties.item(k); 
-						if(property.hasAttribute("encounter")){
-							encounterRate = Integer.parseInt(property.getAttribute("value"));
-						}
-					}
 					NodeList animations = tile.getElementsByTagName("animation");
 					if(animations.getLength() > 0){
 						NodeList frameNodes = tile.getElementsByTagName("frame");
@@ -119,5 +112,22 @@ public class TileMapFactory {
 				}
 			}
 			return new StaticMapTile(type, rsm.getSprite(imageSource, gid, firstgid, tileSize));
+		}
+		
+		private static void printMap(Tile[][] map, int width, int height){
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0; i < width; i++){
+				for(int k = 0; k < height; k++){
+					Tile tile = map[i][k];
+					if(tile.getType() == TileType.BLOCKED){
+						sb.append("[X]");
+					}
+					if(tile.getType() == TileType.WALKING){
+						sb.append("[O]");
+					}
+				}
+				sb.append("\n");
+			}
+			System.out.println(sb.toString());
 		}
 }

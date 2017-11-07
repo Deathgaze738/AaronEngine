@@ -11,6 +11,7 @@ public class Tuple<X, Y> {
 	public Tuple(X mLeft, Y mRight){
 		left = mLeft;
 		right = mRight;
+		
 	}
 
 	public X getLeft() {
