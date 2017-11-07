@@ -16,7 +16,7 @@ import aaron.game.pokemonatb.component.BackpackComponent;
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InteractibleComponent;
-import aaron.game.pokemonatb.component.RenderComponent;
+import aaron.game.pokemonatb.component.RenderableComponent;
 import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.Component;
@@ -42,12 +42,10 @@ import aaron.game.pokemonatb.system.CameraSystem;
 import aaron.game.pokemonatb.system.CollisionSystem;
 import aaron.game.pokemonatb.system.InputSystem;
 import aaron.game.pokemonatb.system.InteractionSystem;
-import aaron.game.pokemonatb.system.MapRenderSystem;
 import aaron.game.pokemonatb.system.MovementSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
-import aaron.game.pokemonatb.system.EntityRenderSystem;
-import aaron.game.pokemonatb.system.EntityRenderSystem;
+import aaron.game.pokemonatb.system.RenderSystem;
 import aaron.game.pokemonatb.system.TextRenderSystem;
 import aaron.game.pokemonatb.system.WarpSystem;
 
@@ -82,7 +80,6 @@ public class MainGameState extends BaseGameState {
 		engine.addEntity(getCharacter());
 		engine.addEntity(getSign());
 		engine.addEntity(getSign2());
-		engine.addEntity(getWorld());
 		//em.addEntity(getAnimationTester(), sm);
 		
 		List<Component> warp = new ArrayList<Component>();
@@ -98,8 +95,7 @@ public class MainGameState extends BaseGameState {
 		warp.add(new TilePositionComponent(5, 10));
 		engine.addEntity(warp);
 		
-		EntityRenderSystem rs = new EntityRenderSystem(engine);
-		MapRenderSystem maps = new MapRenderSystem(engine);
+		RenderSystem rs = new RenderSystem(engine);
 		PlayerSystem ps = new PlayerSystem(engine);
 		MovementSystem ms = new MovementSystem(engine);
 		InputSystem ins = new InputSystem(engine);
@@ -110,7 +106,6 @@ public class MainGameState extends BaseGameState {
 		InteractionSystem is = new InteractionSystem(engine);
 		CollisionSystem cos = new CollisionSystem(engine);
 		
-		engine.addSystem(maps, 996);
 		engine.addSystem(rs, 997);
 		engine.addSystem(trs, 998);
 		engine.addSystem(ins, 1);
@@ -128,7 +123,9 @@ public class MainGameState extends BaseGameState {
 	private List<Component> getWorld(){
 		List<Component> world = new ArrayList<Component>();
 		TileMapComponent map = TileMapFactory.tileMapFromFile(currentMap, 0, TileMapComponent.ORTHOGONAL, 16);
+		RenderableComponent render = new RenderableComponent(0);
 		world.add(map);
+		world.add(render);
 		return world;
 	}
 	
@@ -179,6 +176,10 @@ public class MainGameState extends BaseGameState {
 		animation.addAnimationState(State.IDLE, 270, rm.getAnimation(animationSheet, new int[]{3}, 1, 16));
 		characterEnt.add(animation);
 		characterEnt.add(new ImageComponent(0, rm.getSprite(animationSheet, 5, 0, 16)));
+		RenderableComponent render = new RenderableComponent(1);
+		render.x = xTile;
+		render.y = yTile;
+		characterEnt.add(render);
 		
 		characterEnt.add(getBackpack());
 		

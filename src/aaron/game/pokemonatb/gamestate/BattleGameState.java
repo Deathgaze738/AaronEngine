@@ -24,7 +24,6 @@ import aaron.game.pokemonatb.manager.GameStateManager;
 import aaron.game.pokemonatb.manager.ResourceManager;
 import aaron.game.pokemonatb.manager.SoundManager;
 import aaron.game.pokemonatb.system.AnimationSystem;
-import aaron.game.pokemonatb.system.EntityRenderSystem;
 import aaron.game.pokemonatb.system.MovementSystem;
 import aaron.game.pokemonatb.system.TextRenderSystem;
 
@@ -48,7 +47,6 @@ public class BattleGameState extends BaseGameState{
 		
 		//BE SURE TO IMPLEMENT A FUCKING BINARY STREAM FORMAT FOR LOADING YOUR SHIT IN BOIIIIIII
 		engine =  new ECSEngine();
-		EntityRenderSystem rs = new EntityRenderSystem(engine);
 		AnimationSystem as = new AnimationSystem(engine);
 		MovementSystem ms = new MovementSystem(engine);
 		TextRenderSystem trs = new TextRenderSystem(engine);
@@ -73,7 +71,6 @@ public class BattleGameState extends BaseGameState{
 		player.add(sPlayer);
 		player.add(tPlayer);
 		playerid = engine.addEntity(player);
-		engine.addSystem(rs, 998);
 		engine.addSystem(trs, 999);
 		engine.addSystem(as, 2);
 		engine.addSystem(ms, 3);
