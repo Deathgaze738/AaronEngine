@@ -1,6 +1,6 @@
 package utils;
 
-public class Vector3 implements IVector<Vector3> {
+public class Vector3D implements IVector<Vector3D> {
 	
 	//X Component
 	public float x = 0f;
@@ -11,7 +11,7 @@ public class Vector3 implements IVector<Vector3> {
 	//Z Component (Can be used as Layer in 2D games)
 	public float z = 0f;
 	
-	public Vector3(float x, float y, float z){
+	public Vector3D(float x, float y, float z){
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -23,12 +23,12 @@ public class Vector3 implements IVector<Vector3> {
 	}
 
 	@Override
-	public float dot(Vector3 vector) {
+	public float dot(Vector3D vector) {
 		return x * vector.x + y * vector.y + z * vector.z;
 	}
 
 	@Override
-	public Vector3 scale(float scale) {
+	public Vector3D scale(float scale) {
 		this.x *= scale;
 		this.y *= scale;
 		this.z *= scale;
@@ -36,7 +36,7 @@ public class Vector3 implements IVector<Vector3> {
 	}
 
 	@Override
-	public Vector3 add(Vector3 vector) {
+	public Vector3D add(Vector3D vector) {
 		this.x += vector.x;
 		this.y += vector.y;
 		this.z += vector.z;
@@ -44,23 +44,21 @@ public class Vector3 implements IVector<Vector3> {
 	}
 
 	@Override
-	public Vector3 sub(Vector3 vector) {
+	public Vector3D sub(Vector3D vector) {
 		this.x -= vector.x;
 		this.y -= vector.y;
 		this.z -= vector.z;
 		return this;
 	}
 
-	@Override
-	public Vector3 add(float x, float y, float z) {
+	public Vector3D add(float x, float y, float z) {
 		this.x += x;
 		this.y += y;
 		this.z += z;
 		return this;
 	}
 
-	@Override
-	public Vector3 sub(float x, float y, float z) {
+	public Vector3D sub(float x, float y, float z) {
 		this.x -= x;
 		this.y -= y;
 		this.z -= z;
