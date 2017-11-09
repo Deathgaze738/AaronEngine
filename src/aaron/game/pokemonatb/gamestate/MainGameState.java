@@ -159,10 +159,10 @@ public class MainGameState extends BaseGameState {
 		characterEnt.add(new TilePositionComponent((int)(cameraX + (Math.ceil(cameraSize/2))), (int)(cameraY + (Math.ceil(cameraSize/2)))));
 		characterEnt.add(new RotationComponent(180));
 		characterEnt.add(new WarpableComponent());
-		characterEnt.add(new CameraComponent(cameraX, cameraY, GamePanel.WIDTH, GamePanel.HEIGHT));
+		characterEnt.add(new CameraComponent(cameraX, cameraY, cameraSize * 16, cameraSize * 16));
 		characterEnt.add(new StateComponent(State.IDLE));
 		characterEnt.add(new InputComponent());
-		characterEnt.add(new TransformComponent(xTile, yTile));
+		characterEnt.add(new TransformComponent(xTile, yTile, 16, 16));
 		int animationTime = 8;
 		String animationSheet = "Resources\\Images\\character.png";
 		AnimationComponent animation = new AnimationComponent(animationTime);
