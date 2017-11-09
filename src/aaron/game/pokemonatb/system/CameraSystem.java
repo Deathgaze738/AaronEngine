@@ -18,10 +18,6 @@ public class CameraSystem extends GameSystemBase {
 		cList.add(TransformComponent.class);
 		cList.add(CameraComponent.class);
 		addRequirements(req, cList);
-
-		List<Class<? extends Component>> cList2 = new ArrayList<Class<? extends Component>>();
-		cList.add(TileMapComponent.class);
-		addRequirements(req, cList2);
 	}
 
 	@Override
@@ -35,6 +31,8 @@ public class CameraSystem extends GameSystemBase {
 			TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
 			camera.xPos = transform.xPixel - (camera.xSize / 2) + (map.tileSize / 2);
 			camera.yPos = transform.yPixel - (camera.ySize / 2) + (map.tileSize / 2);
+			//System.out.println("X: " + camera.xPos);
+			//System.out.println("Y: " + camera.yPos);
 		}
 	}
 
