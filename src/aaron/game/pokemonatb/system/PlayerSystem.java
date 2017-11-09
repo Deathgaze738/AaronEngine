@@ -72,8 +72,8 @@ public class PlayerSystem extends GameSystemBase{
 			lastState = state.state;
 			lastRotation = rotation.rotation;
 			//System.out.println("Player: " + transform.xPixel + ", " + transform.yPixel);
-			System.out.println("Current State: " + state.state.toString());
-			System.out.println("Movement: " + transform.move);
+			//System.out.println("Current State: " + state.state.toString());
+			//System.out.println("Movement: " + transform.move);
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class PlayerSystem extends GameSystemBase{
 			state.state = State.WALKING;
 			if(!engine.hasComponent(entity, WalkingComponent.class)){
 				transform.move = 1;
-				System.out.println("UPDATED");
+				//System.out.println("UPDATED");
 				rotation.rotation = stateToRotation.get(input.state);
 			}
 			//System.out.println("WALKING");
