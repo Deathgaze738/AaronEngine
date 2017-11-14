@@ -5,9 +5,9 @@ import java.util.List;
 
 import aaron.game.pokemonatb.component.AnimationComponent;
 import aaron.game.pokemonatb.component.Component;
-import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.ImageComponent;
 import aaron.game.pokemonatb.component.StateComponent;
+import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.manager.EntityManager;
 
@@ -21,7 +21,7 @@ public class AnimationSystem extends GameSystemBase{
 		cList.add(StateComponent.class);
 		cList.add(AnimationComponent.class);
 		cList.add(ImageComponent.class);
-		cList.add(RotationComponent.class);
+		cList.add(TransformComponent.class);
 		addRequirements(req, cList);
 	}
 
@@ -31,7 +31,7 @@ public class AnimationSystem extends GameSystemBase{
 			StateComponent state = (StateComponent) engine.getComponent(entity, StateComponent.class);
 			AnimationComponent animation = (AnimationComponent) engine.getComponent(entity, AnimationComponent.class);
 			ImageComponent sprite = (ImageComponent) engine.getComponent(entity, ImageComponent.class);
-			RotationComponent rotation = (RotationComponent) engine.getComponent(entity, RotationComponent.class);
+			TransformComponent rotation = (TransformComponent) engine.getComponent(entity, TransformComponent.class);
 			if(state.stateChange){
 				animation.currentFrame = 0;
 				animation.currentTick = 0;

@@ -11,7 +11,6 @@ import aaron.game.pokemonatb.component.InputState;
 import aaron.game.pokemonatb.component.InteractibleComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.manager.EntityManager;
@@ -25,7 +24,7 @@ public class InteractionSystem extends GameSystemBase{
 		List<Class<? extends Component>> cList = new ArrayList<Class<? extends Component>>();
 		cList.add(InputComponent.class);
 		cList.add(TilePositionComponent.class);
-		cList.add(RotationComponent.class);
+		cList.add(TransformComponent.class);
 		addRequirements(req, cList);
 		cList = new ArrayList<Class<? extends Component>>();
 		cList.add(TilePositionComponent.class);
@@ -40,7 +39,7 @@ public class InteractionSystem extends GameSystemBase{
 		for(int player : players){
 			InputComponent pIn = engine.getComponent(player, InputComponent.class);
 			TilePositionComponent pPos = engine.getComponent(player, TilePositionComponent.class);
-			RotationComponent pRot = engine.getComponent(player, RotationComponent.class);
+			TransformComponent pRot = engine.getComponent(player, TransformComponent.class);
 			if((pIn.state == InputState.INTERACT_HOLD || pIn.state == InputState.INTERACT_PRESS)){
 				int x = (int) Math.cos(Math.toRadians((double)pRot.rotation) + Math.toRadians(270.0));
 				int y = (int) Math.sin(Math.toRadians((double)pRot.rotation) + Math.toRadians(270.0));

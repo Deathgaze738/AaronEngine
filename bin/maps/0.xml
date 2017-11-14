@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="56">
- <tileset firstgid="1" source="C:\\Users\\Aaron\\Desktop\\PokemonATB\\PokemonATB\\Resources\\tilesets\\0.xml"/>
+ <tileset firstgid="1" source="Resources\\tilesets\\0.xml"/>
  <layer name="Background" width="50" height="50">
   <data>
    <tile gid="4882"/>

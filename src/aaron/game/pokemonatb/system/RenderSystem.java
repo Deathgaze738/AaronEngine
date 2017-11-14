@@ -62,10 +62,10 @@ public class RenderSystem extends GameSystemBase {
 		int x = 0;
 		int y = 0;
 		
-		int xOff = mainCamera.xPos % gameMap.tileSize;
-		int yOff = mainCamera.yPos % gameMap.tileSize;
-		int startXTile = mainCamera.xPos / gameMap.tileSize;
-		int startYTile = mainCamera.yPos / gameMap.tileSize;
+		int xOff = (int) mainCamera.xPos % gameMap.tileSize;
+		int yOff = (int) mainCamera.yPos % gameMap.tileSize;
+		int startXTile = (int) mainCamera.xPos / gameMap.tileSize;
+		int startYTile = (int) mainCamera.yPos / gameMap.tileSize;
 		int endXTile = (int) Math.ceil((double)(mainCamera.xPos + mainCamera.xSize) / gameMap.tileSize);
 		int endYTile = (int) Math.ceil((double)(mainCamera.yPos + mainCamera.ySize) / gameMap.tileSize);
 		
@@ -90,8 +90,8 @@ public class RenderSystem extends GameSystemBase {
 	}
 	
 	private void updateImage(ImageComponent imageComp, RenderableComponent renderComp, TransformComponent transform){
-		renderComp.x = transform.xPixel - mainCamera.xPos;
-		renderComp.y = transform.yPixel - mainCamera.yPos;
+		renderComp.x = (int) (transform.position.x - mainCamera.xPos);
+		renderComp.y = (int) (transform.position.y - mainCamera.yPos);
 	}
 	
 	private void drawImage(ImageComponent imageComp, RenderableComponent renderComp, Graphics2D g){

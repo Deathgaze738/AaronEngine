@@ -17,7 +17,6 @@ import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InteractibleComponent;
 import aaron.game.pokemonatb.component.RenderableComponent;
-import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.TilePositionComponent;
@@ -39,10 +38,10 @@ import aaron.game.pokemonatb.manager.SoundManager;
 import aaron.game.pokemonatb.manager.SystemManager;
 import aaron.game.pokemonatb.system.AnimationSystem;
 import aaron.game.pokemonatb.system.CameraSystem;
-import aaron.game.pokemonatb.system.CollisionSystem;
+//import aaron.game.pokemonatb.system.CollisionSystem;
 import aaron.game.pokemonatb.system.InputSystem;
 import aaron.game.pokemonatb.system.InteractionSystem;
-import aaron.game.pokemonatb.system.MovementSystem;
+//import aaron.game.pokemonatb.system.MovementSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
 import aaron.game.pokemonatb.system.RenderSystem;
@@ -97,22 +96,22 @@ public class MainGameState extends BaseGameState {
 		
 		RenderSystem rs = new RenderSystem(engine);
 		PlayerSystem ps = new PlayerSystem(engine);
-		MovementSystem ms = new MovementSystem(engine);
+		//MovementSystem ms = new MovementSystem(engine);
 		InputSystem ins = new InputSystem(engine);
 		CameraSystem cs = new CameraSystem(engine);
 		AnimationSystem as = new AnimationSystem(engine);
 		WarpSystem ws = new WarpSystem(engine);
 		TextRenderSystem trs = new TextRenderSystem(engine);
 		InteractionSystem is = new InteractionSystem(engine);
-		CollisionSystem cos = new CollisionSystem(engine);
+		//CollisionSystem cos = new CollisionSystem(engine);
 		
 		engine.addSystem(rs, 997);
 		engine.addSystem(trs, 998);
 		engine.addSystem(ins, 1);
 		engine.addSystem(ps, 2);
 		engine.addSystem(as, 4);
-		engine.addSystem(cos, 5);
-		engine.addSystem(ms, 6);
+		//engine.addSystem(cos, 5);
+		//engine.addSystem(ms, 6);
 		engine.addSystem(cs, 7);
 		engine.addSystem(ws, 3);
 		engine.addSystem(is, 8);
@@ -157,12 +156,11 @@ public class MainGameState extends BaseGameState {
 	private List<Component> getCharacter(){
 		List<Component> characterEnt = new ArrayList<Component>();
 		characterEnt.add(new TilePositionComponent((int)(cameraX + (Math.ceil(cameraSize/2))), (int)(cameraY + (Math.ceil(cameraSize/2)))));
-		characterEnt.add(new RotationComponent(180));
 		characterEnt.add(new WarpableComponent());
 		characterEnt.add(new CameraComponent(cameraX, cameraY, cameraSize * 16, cameraSize * 16));
 		characterEnt.add(new StateComponent(State.IDLE));
 		characterEnt.add(new InputComponent());
-		characterEnt.add(new TransformComponent(xTile, yTile, 16, 16));
+		characterEnt.add(new TransformComponent(xTile, yTile, 1f, 180f));
 		int animationTime = 8;
 		String animationSheet = "Resources\\Images\\character.png";
 		AnimationComponent animation = new AnimationComponent(animationTime);
@@ -197,8 +195,7 @@ public class MainGameState extends BaseGameState {
 	
 	private List<Component> getAnimationTester(){
 		List<Component> characterEnt = new ArrayList<Component>();
-		characterEnt.add(new TransformComponent(5, 5));
-		characterEnt.add(new RotationComponent(180));
+		characterEnt.add(new TransformComponent(5f, 5f, 1f, 180f));
 		characterEnt.add(new StateComponent(State.WALKING));
 		String animationSheet = "Resources\\Images\\character.png";
 		int animationTime = 10;
@@ -231,7 +228,7 @@ public class MainGameState extends BaseGameState {
 		}
 		if(KeyManager.isPressed(KeyManager.E)){
 			SoundManager.getInstance().stop("music");
-			sm.pushState(new BattleGameState(sm));
+			//sm.pushState(new BattleGameState(sm));
 		}
 	}
 

@@ -8,9 +8,9 @@ import java.util.Map;
 import utils.Tuple;
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
+import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TileMapComponent;
@@ -30,7 +30,7 @@ public class WarpSystem extends GameSystemBase{
 		List<Class<? extends Component>> cList1 = new ArrayList<Class<? extends Component>>();
 		cList1.add(CameraComponent.class);
 		cList1.add(TransformComponent.class);
-		cList1.add(RotationComponent.class);
+		cList1.add(PhysicsComponent.class);
 		cList1.add(WarpableComponent.class);
 		cList1.add(TilePositionComponent.class);
 		addRequirements(req, cList1);
@@ -55,7 +55,7 @@ public class WarpSystem extends GameSystemBase{
 		
 		for(int player : players){
 			TransformComponent positionComp = engine.getComponent(player, TransformComponent.class);
-			RotationComponent rotationComp = engine.getComponent(player, RotationComponent.class);
+			PhysicsComponent physicsComp = engine.getComponent(player, PhysicsComponent.class);
 			CameraComponent cameraComp = engine.getComponent(player, CameraComponent.class);
 			WarpableComponent warpableComp = engine.getComponent(player, WarpableComponent.class);
 			TilePositionComponent tilePosComp = engine.getComponent(player, TilePositionComponent.class);
@@ -72,15 +72,15 @@ public class WarpSystem extends GameSystemBase{
 					
 					tilePosComp.xTile = warpComp.xTile;
 					tilePosComp.yTile = warpComp.yTile;
-					positionComp.xPixel = (tilePosComp.xTile) * TILE_SIZE;
-					positionComp.yPixel = (tilePosComp.yTile) * TILE_SIZE;
-					cameraComp.xPos = positionComp.xPixel - (cameraComp.xSize / 2) + (TILE_SIZE / 2);
-					cameraComp.yPos = positionComp.yPixel - (cameraComp.ySize / 2) + (TILE_SIZE / 2);
-					rotationComp.rotation = warpComp.rotation;
+					positionComp.position.x = (tilePosComp.xTile) * TILE_SIZE;
+					positionComp.position.y = (tilePosComp.yTile) * TILE_SIZE;
+					cameraComp.xPos = positionComp.position.x - (cameraComp.xSize / 2) + (TILE_SIZE / 2);
+					cameraComp.yPos = positionComp.position.y - (cameraComp.ySize / 2) + (TILE_SIZE / 2);
+					positionComp.rotation = warpComp.rotation;
 					warpableComp.active = false;
 					warpableComp.lastWarpPos.setLeft(warpComp.xTile);
 					warpableComp.lastWarpPos.setRight(warpComp.yTile);
-					positionComp.move = 1;
+					physicsComp.velocity.add(0f, 1f, 0f);
 					break;
 				}
 			}

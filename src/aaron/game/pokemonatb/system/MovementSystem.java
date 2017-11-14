@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import utils.Tuple;
+import utils.Vector3D;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.RotationComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.WalkingComponent;
+import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 
 public class MovementSystem extends GameSystemBase {
@@ -27,7 +28,7 @@ public class MovementSystem extends GameSystemBase {
 		activeMovements = new HashMap<Integer, Integer>();
 		SysRequirement req = SysRequirement.AllOf;
 		List<Class<? extends Component>> cList = new ArrayList<Class<? extends Component>>();
-		cList.add(RotationComponent.class);
+		cList.add(PhysicsComponent.class);
 		cList.add(TransformComponent.class);
 		cList.add(TilePositionComponent.class);
 		addRequirements(req, cList);
@@ -40,12 +41,12 @@ public class MovementSystem extends GameSystemBase {
 				updatePosition(entity);
 			}
 			else{
-				TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
+				PhysicsComponent physics = engine.getComponent(entity, TransformComponent.class);
 				//System.out.println("MOVE: " + transform.move);
-				if(transform.move > 0){
-					transform.move = 0;
+				if(physics.velocity.length() > 0){
+					physics.velocity.set(Vector3D.ZERO);
 					activeMovements.put(entity, 0);
-					engine.addComponent(entity, new WalkingComponent());
+					engine.addComponent(entity, new PhysicsComponent());
 					updatePosition(entity);
 				}
 			}
@@ -72,7 +73,7 @@ public class MovementSystem extends GameSystemBase {
 				tilePos.xTile += (int) Math.cos(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
 				tilePos.yTile += (int) Math.sin(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
 				transform.walkingTick = 0;
-				engine.removeComponent(entity, WalkingComponent.class);
+				engine.removeComponent(entity, PhysicsComponent.class);
 			}
 		}
 		else{
