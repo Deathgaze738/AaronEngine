@@ -2,6 +2,8 @@ package utils;
 
 public class Vector2D implements IVector<Vector2D> {
 	
+	public static final Vector2D ZERO = new Vector2D(0f, 0f);
+	
 	//X Component
 	public float x = 0f;
 	
@@ -53,6 +55,17 @@ public class Vector2D implements IVector<Vector2D> {
 	public Vector2D sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
+		return this;
+	}
+
+	@Override
+	public Vector2D set(Vector2D vector) {
+		return this.set(vector.x, vector.y);
+	}
+	
+	public Vector2D set(float x, float y){
+		this.x = x;
+		this.y = y;
 		return this;
 	}
 }

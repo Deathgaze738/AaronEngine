@@ -17,5 +17,7 @@ public interface IVector<T extends IVector<T>> {
 	//Returns dot product of this vector
 	float dot(T vector);
 	
+	//Sets this vector to passed vector
+	T set(T vector);
 	
 }

@@ -2,6 +2,8 @@ package utils;
 
 public class Vector3D implements IVector<Vector3D> {
 	
+	public static final Vector3D ZERO = new Vector3D(0f, 0f, 0f);
+	
 	//X Component
 	public float x = 0f;
 	
@@ -15,6 +17,18 @@ public class Vector3D implements IVector<Vector3D> {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	@Override
+	public Vector3D set(Vector3D vector){
+		return this.set(vector.x, vector.y, vector.z);
+	}
+	
+	public Vector3D set(float x, float y, float z){
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		return this;
 	}
 	
 	@Override
