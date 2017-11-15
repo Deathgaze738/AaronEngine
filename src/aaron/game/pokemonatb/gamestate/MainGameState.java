@@ -220,7 +220,7 @@ public class MainGameState extends BaseGameState {
 	@Override
 	public void inputHandler() {
 		if(KeyManager.isPressed(KeyManager.CONSOLE_KEY)){
-			//System.out.println(em.toString());
+			System.out.println(engine.toString());
 			//System.out.println(sm.toString());
 			//PositionComponent pos = (PositionComponent) em.getComponent(charID, PositionComponent.class);
 			//System.out.println("Current Player Location: " + pos.xTile + " " + pos.yTile);

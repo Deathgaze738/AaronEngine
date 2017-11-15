@@ -69,4 +69,8 @@ public class ECSEngine {
 	public void draw(Graphics2D g) {
 		sm.draw(g);
 	}
+	
+	public String toString(){
+		return sm.toString();
+	}
 }

@@ -6,6 +6,7 @@ public class ImageComponent extends Component {
 	public BufferedImage sprite;
 	public int xSize;
 	public int ySize;
+	//Layer purely for game logic.
 	public int layer;
 	
 	public ImageComponent(int layer, BufferedImage sprite){

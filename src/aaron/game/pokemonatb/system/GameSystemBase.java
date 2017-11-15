@@ -61,6 +61,8 @@ public abstract class GameSystemBase implements GameSystemInterface {
 	
 	public void registerEntity(int entityID, Map<Class<? extends Component>, Component> components){
 		boolean flag;
+		//System.out.println(entityID);
+		//System.out.println(components.keySet());
 		for(Tuple<SysRequirement, List<Class<? extends Component>>> requirements : componentRequirements){
 			switch (requirements.getLeft()){
 				default:
@@ -75,10 +77,11 @@ public abstract class GameSystemBase implements GameSystemInterface {
 			}
 			if(flag){
 				flag = false;
+				//System.out.println(entityID + " REGISTERED");
 				entities.get(componentRequirements.indexOf(requirements)).add(entityID);
 			}
 			else{
-				
+				//System.out.println(entityID + " NOT REGISTERED");
 			}
 		}
 	}
@@ -93,7 +96,6 @@ public abstract class GameSystemBase implements GameSystemInterface {
 		if(components.keySet().containsAll(list)){
 			return true;
 		}
-		//System.out.println("Missing Components");
 		return false;
 	}
 	
