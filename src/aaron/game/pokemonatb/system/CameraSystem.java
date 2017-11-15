@@ -25,10 +25,10 @@ public class CameraSystem extends GameSystemBase {
 		for(int entity : getEntities(0)){
 			CameraComponent camera = engine.getComponent(entity, CameraComponent.class);
 			TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
-			camera.xPos = transform.xPixel - (camera.xSize / 2) + transform.xSize/2;
-			camera.yPos = transform.yPixel - (camera.ySize / 2) + transform.ySize/2;
-			//System.out.println("X: " + camera.xPos);
-			//System.out.println("Y: " + camera.yPos);
+			camera.xPos = transform.position.x - (camera.xSize / 2) + transform.position.x/2;
+			camera.yPos = transform.position.y - (camera.ySize / 2) + transform.position.y/2;
+			System.out.println("X: " + camera.xPos);
+			System.out.println("Y: " + camera.yPos);
 		}
 	}
 
