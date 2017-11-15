@@ -35,22 +35,22 @@ public class AnimationSystem extends GameSystemBase{
 			if(state.stateChange){
 				animation.currentFrame = 0;
 				animation.currentTick = 0;
-				sprite.sprite = animation.animations.get(state.state+"#"+rotation.rotation).get(0);
+				sprite.sprite = animation.animations.get(state.state+"#"+(int)rotation.rotation).get(0);
 				//animation.currentFrame++;
 				//System.out.println("STATE CHANGE");
 			}
 			else{
 				if(animation.currentTick == animation.frameRate){
 					//System.out.println(animation.animations.get(state.state+"#"+rotation.rotation).size() - 1);
-					if(animation.currentFrame > animation.animations.get(state.state+"#"+rotation.rotation).size() - 1){
+					if(animation.currentFrame > animation.animations.get(state.state+"#"+(int)rotation.rotation).size() - 1){
 						animation.currentFrame = 0;
 						animation.currentTick = 0;
-						sprite.sprite = animation.animations.get(state.state+"#"+rotation.rotation).get(animation.currentFrame);
+						sprite.sprite = animation.animations.get(state.state+"#"+(int)rotation.rotation).get(animation.currentFrame);
 						animation.currentFrame++;
 					}
 					else{
 						
-						sprite.sprite = animation.animations.get(state.state+"#"+rotation.rotation).get(animation.currentFrame);
+						sprite.sprite = animation.animations.get(state.state+"#"+(int)rotation.rotation).get(animation.currentFrame);
 						animation.currentFrame++;
 						animation.currentTick = 0;
 					}
