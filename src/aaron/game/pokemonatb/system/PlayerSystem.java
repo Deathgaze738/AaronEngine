@@ -21,6 +21,7 @@ public class PlayerSystem extends GameSystemBase{
 	private static Map<InputState, Float> stateToRotation;
 	State lastState = null;
 	float lastRotation = 360;
+	int stepsTaken = 0;
 
 	public PlayerSystem(ECSEngine engine) {
 		super(engine);
@@ -73,15 +74,17 @@ public class PlayerSystem extends GameSystemBase{
 	}
 	
 	private void walkingHandler(int entity, InputComponent input, StateComponent state, TransformComponent transform){
-		if(InputState.holdInputs.contains(input.state)){
-			state.state = State.WALKING;
+		if(stepsTaken < 15){
 			MovementComponent movement = new MovementComponent(false);
 			movement.translate.add(0f, 1f, 0f);
 			engine.addComponent(entity, movement);
+			stepsTaken++;
 			//System.out.println("UPDATED");
 		}
 		else{
+			stepsTaken = 0;
 			state.state = State.IDLE;
+			idleHandler(entity, input, state, transform);
 		}
 	}
 	
