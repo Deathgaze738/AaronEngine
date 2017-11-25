@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="aaron/game/pokemonatb/system/CollisionSystem.java|aaron/game/pokemonatb/system/MovementSystem.java|aaron/game/pokemonatb/gamestate/BattleGameState.java" kind="src" path="src"/>
+	<classpathentry excluding="aaron/game/pokemonatb/gamestate/BattleGameState.java|aaron/game/pokemonatb/system/CollisionSystem.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="Resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="libs/luaj-jse-3.0.1.jar"/>

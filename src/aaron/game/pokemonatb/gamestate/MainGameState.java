@@ -41,6 +41,7 @@ import aaron.game.pokemonatb.system.CameraSystem;
 //import aaron.game.pokemonatb.system.CollisionSystem;
 import aaron.game.pokemonatb.system.InputSystem;
 import aaron.game.pokemonatb.system.InteractionSystem;
+import aaron.game.pokemonatb.system.MovementSystem;
 //import aaron.game.pokemonatb.system.MovementSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
 import aaron.game.pokemonatb.system.PlayerSystem;
@@ -96,7 +97,7 @@ public class MainGameState extends BaseGameState {
 		
 		RenderSystem rs = new RenderSystem(engine);
 		PlayerSystem ps = new PlayerSystem(engine);
-		//MovementSystem ms = new MovementSystem(engine);
+		MovementSystem ms = new MovementSystem(engine);
 		InputSystem ins = new InputSystem(engine);
 		CameraSystem cs = new CameraSystem(engine);
 		AnimationSystem as = new AnimationSystem(engine);
@@ -111,7 +112,7 @@ public class MainGameState extends BaseGameState {
 		engine.addSystem(ps, 2);
 		engine.addSystem(as, 4);
 		//engine.addSystem(cos, 5);
-		//engine.addSystem(ms, 6);
+		engine.addSystem(ms, 6);
 		engine.addSystem(cs, 7);
 		engine.addSystem(ws, 3);
 		engine.addSystem(is, 8);

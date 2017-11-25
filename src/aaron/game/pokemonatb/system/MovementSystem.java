@@ -7,83 +7,55 @@ import java.util.Map;
 
 import utils.Tuple;
 import utils.Vector3D;
+import aaron.game.pokemonatb.component.BoxColliderComponent;
 import aaron.game.pokemonatb.component.Component;
-import aaron.game.pokemonatb.component.RotationComponent;
+import aaron.game.pokemonatb.component.MovementComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.StateComponent;
+import aaron.game.pokemonatb.component.TileMapComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 
 public class MovementSystem extends GameSystemBase {
-	
-	//index is entity, number is pixels moved
-	Map<Integer, Integer> activeMovements;
-	private static final int WALK_CYCLE = 1;
-	private static final int TILE_SIZE = 16;
 
 	public MovementSystem(ECSEngine engine) {
 		super(engine);
-		activeMovements = new HashMap<Integer, Integer>();
+		//Moving Entities
 		SysRequirement req = SysRequirement.AllOf;
-		List<Class<? extends Component>> cList = new ArrayList<Class<? extends Component>>();
-		cList.add(PhysicsComponent.class);
+		List<Class<? extends Component>> cList = new ArrayList<>();
 		cList.add(TransformComponent.class);
-		cList.add(TilePositionComponent.class);
+		cList.add(MovementComponent.class);
 		addRequirements(req, cList);
 	}
 
 	@Override
 	public void update() {
 		for(int entity : getEntities(0)){
-			if(activeMovements.containsKey(entity)){
-				updatePosition(entity);
+			TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
+			MovementComponent movement = engine.getComponent(entity, MovementComponent.class);
+			transform.rotation += movement.rotate;
+			if(movement.worldAxis){
+				transform.position.add(movement.translate);
 			}
 			else{
-				PhysicsComponent physics = engine.getComponent(entity, TransformComponent.class);
-				//System.out.println("MOVE: " + transform.move);
-				if(physics.velocity.length() > 0){
-					physics.velocity.set(Vector3D.ZERO);
-					activeMovements.put(entity, 0);
-					engine.addComponent(entity, new PhysicsComponent());
-					updatePosition(entity);
-				}
+				transform.position.add(localToWorld(movement.translate, transform.rotation));
 			}
+			engine.removeComponent(entity, MovementComponent.class);
 		}
 	}
 	
-	public void updatePosition(Integer entity){
-		TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
-		RotationComponent rotation = engine.getComponent(entity, RotationComponent.class);
-		TilePositionComponent tilePos = engine.getComponent(entity, TilePositionComponent.class);
-		if(transform.walkingTick % WALK_CYCLE == 0){
-			if(activeMovements.get(entity) < TILE_SIZE){
-				int xOff = (int) Math.cos(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
-				int yOff = (int) Math.sin(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
-				//transform.xOffset += (rotation.rotation == 270) ? -xOff : xOff;
-				//transform.yOffset += (rotation.rotation == 0) ? -yOff : yOff;
-				transform.xPixel += xOff;
-				transform.yPixel += yOff;
-				activeMovements.put(entity, activeMovements.get(entity) + 1);
-				transform.walkingTick = 0;
-			}
-			else{
-				activeMovements.remove(entity);
-				tilePos.xTile += (int) Math.cos(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
-				tilePos.yTile += (int) Math.sin(Math.toRadians((double)rotation.rotation) + Math.toRadians(270.0));
-				transform.walkingTick = 0;
-				engine.removeComponent(entity, PhysicsComponent.class);
-			}
-		}
-		else{
-			transform.walkingTick++;
-		}
-	}
-	
-	@Override
-	public void removeComponent(Integer entityID, Class<? extends Component> classType){
-		super.removeComponent(entityID, classType);
-		activeMovements.remove(entityID);
+	public static Vector3D localToWorld(Vector3D local, float rotation){
+		Vector3D world = new Vector3D(Vector3D.ZERO);
+		//System.out.println("Local Movement: " + local.toString() + " bearing " + rotation + " degrees.");
+		world.x = (float) ((local.x * Math.cos(Math.toRadians(rotation))) + (local.y * Math.sin(Math.toRadians(rotation))));
+		world.y = (float) ((local.x * Math.sin(Math.toRadians(rotation))) - (local.y * Math.cos(Math.toRadians(rotation))));
+		world.z = local.z;
+		world.x = Math.round(world.x);
+		world.y = Math.round(world.y);
+		world.z = Math.round(world.z);
+		//System.out.println("Global Movement: " + world.toString() + " bearing " + rotation + " degrees.");
+		return world;
 	}
 }
