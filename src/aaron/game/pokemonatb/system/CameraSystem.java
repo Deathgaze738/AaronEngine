@@ -10,6 +10,9 @@ import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 
 public class CameraSystem extends GameSystemBase {
+	//Temporary camera offsett, going to be replaced by a camera class.
+	float xOffset = 8;
+	float yOffset = 8;
 
 	public CameraSystem(ECSEngine engine) {
 		super(engine);
@@ -25,10 +28,8 @@ public class CameraSystem extends GameSystemBase {
 		for(int entity : getEntities(0)){
 			CameraComponent camera = engine.getComponent(entity, CameraComponent.class);
 			TransformComponent transform = engine.getComponent(entity, TransformComponent.class);
-			camera.xPos = transform.position.x - (camera.xSize / 2) + transform.position.x/2;
-			camera.yPos = transform.position.y - (camera.ySize / 2) + transform.position.y/2;
-			System.out.println("X: " + camera.xPos);
-			System.out.println("Y: " + camera.yPos);
+			camera.xPos = transform.position.x - (camera.xSize / 2) + xOffset;
+			camera.yPos = transform.position.y - (camera.ySize / 2) + yOffset;
 		}
 	}
 

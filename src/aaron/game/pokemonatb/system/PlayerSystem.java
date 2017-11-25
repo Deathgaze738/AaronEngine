@@ -8,6 +8,7 @@ import java.util.Map;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InputState;
+import aaron.game.pokemonatb.component.MovementComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
@@ -37,7 +38,6 @@ public class PlayerSystem extends GameSystemBase{
 		List<Class<? extends Component>> cList = new ArrayList<>();
 		cList.add(InputComponent.class);
 		cList.add(StateComponent.class);
-		cList.add(PhysicsComponent.class);
 		cList.add(TransformComponent.class);
 		addRequirements(req, cList);
 	}
@@ -46,19 +46,17 @@ public class PlayerSystem extends GameSystemBase{
 	public void update() {
 		StateComponent state;
 		InputComponent input;
-		PhysicsComponent phys;
 		TransformComponent transform;
 		
 		for(int entity : getEntities(0)){
 			state = engine.getComponent(entity, StateComponent.class);
 			input = engine.getComponent(entity, InputComponent.class);
-			phys = engine.getComponent(entity, PhysicsComponent.class);
 			transform = engine.getComponent(entity, TransformComponent.class);
 			if(state.state == State.IDLE){
-				idleHandler(entity, input, phys, state, transform);
+				idleHandler(entity, input, state, transform);
 			}
 			else if(state.state == State.WALKING){
-				walkingHandler(entity, input, phys, state, transform);
+				walkingHandler(entity, input, state, transform);
 			}
 			if(lastState != state.state || transform.rotation != lastRotation){
 				//System.out.println("STATE CHANGE PLAYER");
@@ -70,36 +68,32 @@ public class PlayerSystem extends GameSystemBase{
 			
 			lastState = state.state;
 			lastRotation = transform.rotation;
-			System.out.println("Current State: " + state.state.toString());
+			//System.out.println("Current State: " + state.state.toString());
 		}
 	}
 	
-	private void walkingHandler(int entity, InputComponent input, PhysicsComponent phys, StateComponent state, TransformComponent transform){
+	private void walkingHandler(int entity, InputComponent input, StateComponent state, TransformComponent transform){
 		if(InputState.holdInputs.contains(input.state)){
 			state.state = State.WALKING;
-			if(!engine.hasComponent(entity, PhysicsComponent.class)){
-				phys.velocity.add(0f, 1f, 0f);
-				System.out.println("UPDATED");
-				transform.rotation = stateToRotation.get(input.state);
-			}
-			//System.out.println("WALKING");
+			MovementComponent movement = new MovementComponent(false);
+			movement.translate.add(0f, 1f, 0f);
+			engine.addComponent(entity, movement);
+			//System.out.println("UPDATED");
 		}
-		else if(!engine.hasComponent(entity, PhysicsComponent.class)){
+		else{
 			state.state = State.IDLE;
 		}
 	}
 	
-	private void idleHandler(int entity, InputComponent input, PhysicsComponent phys, StateComponent state, TransformComponent transform){
-		if(phys.velocity.length() > 0){
-			System.out.println("WALKING");
-			state.state = State.WALKING;
-		}	
+	private void idleHandler(int entity, InputComponent input, StateComponent state, TransformComponent transform){
 		if(stateToRotation.get(input.state) == null)
 			return;
 		if(transform.rotation == stateToRotation.get(input.state)){
 			state.state = State.WALKING;
 			transform.rotation = stateToRotation.get(input.state);
-			phys.velocity.add(0f, 1f, 0f);
+			MovementComponent movement = new MovementComponent(false);
+			movement.translate.add(0f, 1f, 0f);
+			engine.addComponent(entity, movement);
 			//System.out.println("WALKING");
 		}
 		else{
