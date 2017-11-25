@@ -3,9 +3,9 @@ import java.awt.geom.Rectangle2D;
 
 
 public class BoxColliderComponent extends Component {
-	public Rectangle2D bounds;
+	public Rectangle2D.Float bounds;
 	
-	public BoxColliderComponent(Rectangle2D bounds){
+	public BoxColliderComponent(Rectangle2D.Float bounds){
 		this.bounds = bounds;
 	}
 	
