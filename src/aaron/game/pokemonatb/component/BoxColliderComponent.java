@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 
 
 public class BoxColliderComponent extends Component {
-	Rectangle2D bounds;
+	public Rectangle2D bounds;
 	
 	public BoxColliderComponent(Rectangle2D bounds){
 		this.bounds = bounds;
