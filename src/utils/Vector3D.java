@@ -19,6 +19,10 @@ public class Vector3D implements IVector<Vector3D> {
 		this.z = z;
 	}
 	
+	public Vector3D(Vector3D vector){
+		this(vector.x, vector.y, vector.z);
+	}
+	
 	@Override
 	public Vector3D set(Vector3D vector){
 		return this.set(vector.x, vector.y, vector.z);
@@ -79,4 +83,10 @@ public class Vector3D implements IVector<Vector3D> {
 		return this;
 	}
 
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("(" + this.x + ", " + this.y + ", " + this.z + ")");
+		return sb.toString();
+	}
 }
