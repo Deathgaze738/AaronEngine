@@ -14,6 +14,6 @@ public class BoxColliderComponent extends Component {
 	}
 	
 	public BoxColliderComponent(float xSize, float ySize, TransformComponent transform){
-		this(new Rectangle2D.Float(transform.position.x, transform.position.y, transform.position.x + xSize, transform.position.y + ySize));
+		this(new Rectangle2D.Float(transform.position.x, transform.position.y, xSize, ySize));
 	}
 }
