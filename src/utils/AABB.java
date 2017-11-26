@@ -8,21 +8,34 @@ import aaron.game.pokemonatb.component.TransformComponent;
 
 public class AABB {
 	int entity = 0;
+	BoxColliderComponent collider;
 	TransformComponent position;
 	Rectangle2D.Float aabb;
-	
-	public AABB(int entity, TransformComponent position){
-		this.entity = entity;
-		this.position = position;
-	}
+	Rectangle2D.Float faabb;
+	float fatPadding = 3;
 	
 	public AABB(int entity, TransformComponent position, BoxColliderComponent collider){
-		this(entity, position);
+		this.entity = entity;
+		this.collider = collider;
+		this.position = position;
 		float cHeight = collider.bounds.height;
 		float cWidth = collider.bounds.width;
 		float height = (float) ((cWidth * Math.sin(position.rotation)) + (cHeight * Math.cos(position.rotation)));
 		float width = (float) ((cHeight * Math.sin(position.rotation)) + (cWidth * Math.cos(position.rotation)));
 		this.aabb = new Rectangle2D.Float(position.position.x, position.position.y, width, height);
+		this.faabb = new Rectangle2D.Float(position.position.x - fatPadding, position.position.y - fatPadding, width + fatPadding, height + fatPadding);
+	}
+	
+	public void updateAABB(){
+		float cHeight = collider.bounds.height;
+		float cWidth = collider.bounds.width;
+		float height = (float) ((cWidth * Math.sin(position.rotation)) + (cHeight * Math.cos(position.rotation)));
+		float width = (float) ((cHeight * Math.sin(position.rotation)) + (cWidth * Math.cos(position.rotation)));
+		this.aabb = new Rectangle2D.Float(position.position.x, position.position.y, width, height);
+	}
+	
+	public void updateFAABB(){
+		this.faabb = new Rectangle2D.Float(position.position.x - fatPadding, position.position.y - fatPadding, collider.bounds.width + fatPadding, collider.bounds.height + fatPadding);
 	}
 	
 	public float getPerimeter(){
