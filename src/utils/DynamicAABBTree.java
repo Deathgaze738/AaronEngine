@@ -35,10 +35,10 @@ public class DynamicAABBTree implements IAABBTree{
 	}
 	
 	@Override
-	public Node insert(AABB aabb){
-		Node node = new Node();
-		node.setData(aabb);
+	public Node insert(Node node){
 		node.setParent(null);
+		node.setLeft(null);
+		node.setRight(null);
 		if(root == null){
 			//System.out.println("FIRST NODE");
 			root = node;
@@ -80,11 +80,11 @@ public class DynamicAABBTree implements IAABBTree{
 				float cost2 = combinedAABB.getPerimeter();
 				
 				if(cost1 < cost2){
-					System.out.println(cost1 + " < " + cost2);
+					//System.out.println(cost1 + " < " + cost2);
 					parent = parent.getLeft();
 				}
 				else{
-					System.out.println(cost1 + " > " + cost2);
+					//System.out.println(cost1 + " > " + cost2);
 					parent = parent.getRight();
 				}
 			}
@@ -114,6 +114,9 @@ public class DynamicAABBTree implements IAABBTree{
 		LinkedList<Node> nodes = new LinkedList<>();
 		List<AABB> rects = new ArrayList<>();
 		nodes.add(root);
+		if(root == null){
+			return new ArrayList<AABB>();
+		}
 		while(nodes.size() != 0){
 			Node node = nodes.poll();
 			rects.add(node.data);
@@ -171,8 +174,41 @@ public class DynamicAABBTree implements IAABBTree{
 	}
 
 	@Override
-	public void update(int entity) {
-		
+	public void update() {
+		if(root == null){
+			return;
+		}
+		List<Node> nodes = getMovedNodes(root, null);
+		for(Node node : nodes){
+			remove(node);
+			insert(node);
+		}
+	}
+	
+	private List<Node> getMovedNodes(Node parent, List<Node> moved){
+		if(parent == null){
+			return moved;
+		}
+		if(moved == null){
+			List<Node> nodes = new ArrayList<>();
+			moved = nodes;
+		}
+		//Traverse tree and create a list of moved nodes
+		if(parent.isLeaf()){
+			parent.data.updateAABB();
+			if(!parent.data.faabb.contains(parent.data.aabb)){
+				moved.add(parent);
+				parent.data.updateFAABB();
+			}
+			else{
+				parent.data.updateFAABB();
+			}
+		}
+		else{
+			getMovedNodes(parent.getLeft(), moved);
+			getMovedNodes(parent.getRight(), moved);
+		}
+		return moved;
 	}
 
 	@Override
@@ -190,6 +226,10 @@ public class DynamicAABBTree implements IAABBTree{
 			}
 		}
 		return intersections;
+	}
+	
+	public Node getRoot(){
+		return root;
 	}
 	
 	private boolean aabbIntersects(AABB aabb1, AABB aabb2){

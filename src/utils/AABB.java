@@ -62,4 +62,8 @@ public class AABB {
 	public Rectangle2D.Float getRect(){
 		return aabb;
 	}
+	
+	public TransformComponent getTransform(){
+		return this.position;
+	}
 }
