@@ -35,20 +35,21 @@ public class DynamicAABBTree implements IAABBTree{
 	}
 	
 	@Override
-	public void insert(AABB aabb){
+	public Node insert(AABB aabb){
 		Node node = new Node();
 		node.setData(aabb);
 		node.setParent(null);
 		if(root == null){
 			//System.out.println("FIRST NODE");
 			root = node;
+			return node;
 		}
 		else{
-			insertNode(root, node);
+			return insertNode(root, node);
 		}	
 	}
 	
-	private void insertNode(Node parent, Node node){
+	private Node insertNode(Node parent, Node node){
 		if(parent.isLeaf()){
 			//System.out.println(parent.toString());
 			Node newParent = new Node();
@@ -90,6 +91,7 @@ public class DynamicAABBTree implements IAABBTree{
 			insertNode(parent, node);
 		}
 		propagateUp(node);
+		return node;
 	}
 	
 	private void propagateUp(Node node){
@@ -126,8 +128,46 @@ public class DynamicAABBTree implements IAABBTree{
 	}
 
 	@Override
-	public void remove(int entity) {
+	public void remove(Node node) {
+		//Ignore if node is null
+		if(node == null){
+			return;
+		}
+		Node parent = node.getParent();
 		
+		//If the parent is null, node is root. So we remove the root.
+		if(parent == null){
+			root = null;
+			return;
+		}
+		
+		//Check which side of the parent the node is connected to and move the other side up.
+		Node child;
+		if(parent.getLeft() == node){
+			child = parent.getRight();
+		}
+		else{
+			child = parent.getLeft();
+		}
+		
+		//Adjust the parent value of child or if parent is root, replace node with child. 
+		if(parent.getParent() != null){
+			Node grandParent = parent.getParent();
+			
+			if(grandParent.getLeft() == parent){
+				grandParent.setLeft(child);
+			}
+			else{
+				grandParent.setRight(child);
+			}
+			child.setParent(grandParent);
+		}
+		else{
+			root = child;
+			child.setParent(null);
+		}
+		
+		propagateUp(child);
 	}
 
 	@Override
