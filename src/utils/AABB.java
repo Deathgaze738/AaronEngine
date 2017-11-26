@@ -3,7 +3,6 @@ package utils;
 import java.awt.geom.Rectangle2D;
 
 import aaron.game.pokemonatb.component.BoxColliderComponent;
-import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.TransformComponent;
 
 public class AABB {

@@ -14,7 +14,6 @@ import aaron.game.pokemonatb.component.InteractibleComponent;
 import aaron.game.pokemonatb.component.TextComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.main.GamePanel;
-import aaron.game.pokemonatb.manager.KeyManager;
 import aaron.game.pokemonatb.manager.ResourceManager;
 import aaron.game.pokemonatb.manager.SoundManager;
 

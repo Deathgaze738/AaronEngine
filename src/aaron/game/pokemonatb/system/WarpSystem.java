@@ -1,23 +1,17 @@
 package aaron.game.pokemonatb.system;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import utils.Tuple;
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.State;
-import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TileMapComponent;
 import aaron.game.pokemonatb.component.WarpComponent;
 import aaron.game.pokemonatb.component.WarpableComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
-import aaron.game.pokemonatb.manager.EntityManager;
 import aaron.game.pokemonatb.manager.SoundManager;
 
 public class WarpSystem extends GameSystemBase{

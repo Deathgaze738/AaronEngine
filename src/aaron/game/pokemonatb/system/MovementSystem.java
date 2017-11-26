@@ -1,21 +1,12 @@
 package aaron.game.pokemonatb.system;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import utils.Tuple;
 import utils.Vector3D;
-import aaron.game.pokemonatb.component.BoxColliderComponent;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.MovementComponent;
-import aaron.game.pokemonatb.component.State;
-import aaron.game.pokemonatb.component.StateComponent;
-import aaron.game.pokemonatb.component.TileMapComponent;
-import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 
 public class MovementSystem extends GameSystemBase {

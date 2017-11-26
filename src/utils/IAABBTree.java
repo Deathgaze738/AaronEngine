@@ -1,6 +1,5 @@
 package utils;
 
-import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 public interface IAABBTree {

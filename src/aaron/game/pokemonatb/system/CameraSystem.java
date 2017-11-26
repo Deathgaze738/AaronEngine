@@ -5,7 +5,6 @@ import java.util.List;
 
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
-import aaron.game.pokemonatb.component.TileMapComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 

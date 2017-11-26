@@ -1,55 +1,16 @@
 package aaron.game.pokemonatb.gamestate;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import utils.Pokemon;
-import utils.Tuple;
-import aaron.game.pokemonatb.component.ActiveComponent;
-import aaron.game.pokemonatb.component.AnimationComponent;
-import aaron.game.pokemonatb.component.BackpackComponent;
-import aaron.game.pokemonatb.component.BoxColliderComponent;
-import aaron.game.pokemonatb.component.CameraComponent;
-import aaron.game.pokemonatb.component.InputComponent;
-import aaron.game.pokemonatb.component.InteractibleComponent;
-import aaron.game.pokemonatb.component.RenderableComponent;
-import aaron.game.pokemonatb.component.State;
-import aaron.game.pokemonatb.component.Component;
-import aaron.game.pokemonatb.component.TilePositionComponent;
-import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.ImageComponent;
-import aaron.game.pokemonatb.component.StateComponent;
-import aaron.game.pokemonatb.component.TextComponent;
-import aaron.game.pokemonatb.component.TileMapComponent;
-import aaron.game.pokemonatb.component.WarpComponent;
-import aaron.game.pokemonatb.component.WarpableComponent;
+import aaron.game.pokemonatb.component.*;
 import aaron.game.pokemonatb.factory.TileMapFactory;
 import aaron.game.pokemonatb.main.ECSEngine;
-import aaron.game.pokemonatb.main.GamePanel;
-import aaron.game.pokemonatb.manager.EntityManager;
-import aaron.game.pokemonatb.manager.GameStateManager;
-import aaron.game.pokemonatb.manager.KeyManager;
-import aaron.game.pokemonatb.manager.ResourceManager;
-import aaron.game.pokemonatb.manager.SoundManager;
-import aaron.game.pokemonatb.manager.SystemManager;
-import aaron.game.pokemonatb.system.AABBTestSystem;
-import aaron.game.pokemonatb.system.AnimationSystem;
-import aaron.game.pokemonatb.system.CameraSystem;
-//import aaron.game.pokemonatb.system.CollisionSystem;
-import aaron.game.pokemonatb.system.InputSystem;
-import aaron.game.pokemonatb.system.InteractionSystem;
-import aaron.game.pokemonatb.system.MovementSystem;
-//import aaron.game.pokemonatb.system.MovementSystem;
-import aaron.game.pokemonatb.system.PlayerSystem;
-import aaron.game.pokemonatb.system.PlayerSystem;
-import aaron.game.pokemonatb.system.RenderSystem;
-import aaron.game.pokemonatb.system.TextRenderSystem;
-import aaron.game.pokemonatb.system.WarpSystem;
+import aaron.game.pokemonatb.manager.*;
+import aaron.game.pokemonatb.system.*;
 
 public class MainGameState extends BaseGameState {
 	
@@ -200,6 +161,7 @@ public class MainGameState extends BaseGameState {
 		return backpack;
 	}
 	
+	@SuppressWarnings("unused")
 	private List<Component> getAnimationTester(){
 		List<Component> characterEnt = new ArrayList<Component>();
 		characterEnt.add(new TransformComponent(5f, 5f, 1f, 180f));

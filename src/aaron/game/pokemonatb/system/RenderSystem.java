@@ -1,6 +1,5 @@
 package aaron.game.pokemonatb.system;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +13,6 @@ import aaron.game.pokemonatb.component.RenderableComponent;
 import aaron.game.pokemonatb.component.TileMapComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
-import aaron.game.pokemonatb.manager.EntityManager;
 import aaron.game.pokemonatb.map.Tile;
 import aaron.game.pokemonatb.map.TileType;
 

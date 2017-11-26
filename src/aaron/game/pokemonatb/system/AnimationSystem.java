@@ -9,7 +9,6 @@ import aaron.game.pokemonatb.component.ImageComponent;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
-import aaron.game.pokemonatb.manager.EntityManager;
 
 public class AnimationSystem extends GameSystemBase{
 	

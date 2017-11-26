@@ -2,8 +2,6 @@ package aaron.game.pokemonatb.system;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,6 @@ import utils.AABB;
 import utils.DynamicAABBTree;
 import utils.Node;
 import aaron.game.pokemonatb.component.BoxColliderComponent;
-import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.TransformComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
@@ -73,7 +70,7 @@ public class AABBTestSystem extends GameSystemBase {
 				TransformComponent transform = new TransformComponent(x, y, 0, 0);
 				BoxColliderComponent collider = new BoxColliderComponent(16, 16, transform);
 				AABB aabb = new AABB(100, transform, collider);
-				List<AABB> intersections = new ArrayList<>();
+				//List<AABB> intersections = new ArrayList<>();
 				Node node = new Node();
 				node.setData(aabb);
 				//System.out.println(aabbTree.query(aabbTree.getRoot(), aabb, intersections));

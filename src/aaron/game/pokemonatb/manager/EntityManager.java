@@ -70,6 +70,8 @@ public class EntityManager{
 		return components;
 	}
 	
+	//I'M REALLY SURE BRO
+	@SuppressWarnings("unchecked")
 	public <T extends Component> T getComponent(int entity, Class<? extends Component> classType){
 		return entities.get(classType) != null ? (entities.get(classType).containsKey(entity) ? (T)entities.get(classType).get(entity) : null) : null;
 	}

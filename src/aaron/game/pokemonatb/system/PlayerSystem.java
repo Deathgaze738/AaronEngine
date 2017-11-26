@@ -12,7 +12,6 @@ import aaron.game.pokemonatb.component.MovementComponent;
 import aaron.game.pokemonatb.component.State;
 import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.PhysicsComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
 import aaron.game.pokemonatb.manager.SoundManager;
 

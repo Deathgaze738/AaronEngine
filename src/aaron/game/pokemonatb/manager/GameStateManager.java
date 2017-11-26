@@ -5,7 +5,6 @@ import java.util.Stack;
 
 import aaron.game.pokemonatb.gamestate.BaseGameState;
 import aaron.game.pokemonatb.gamestate.IntroGameState;
-import aaron.game.pokemonatb.gamestate.MainGameState;
 
 public class GameStateManager {
 	

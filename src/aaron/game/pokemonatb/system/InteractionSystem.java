@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aaron.game.pokemonatb.component.ActiveComponent;
-import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.Component;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InputState;
 import aaron.game.pokemonatb.component.InteractibleComponent;
 import aaron.game.pokemonatb.component.TilePositionComponent;
 import aaron.game.pokemonatb.component.TransformComponent;
-import aaron.game.pokemonatb.component.StateComponent;
 import aaron.game.pokemonatb.main.ECSEngine;
-import aaron.game.pokemonatb.manager.EntityManager;
-import aaron.game.pokemonatb.manager.KeyManager;
 
 public class InteractionSystem extends GameSystemBase{
 
