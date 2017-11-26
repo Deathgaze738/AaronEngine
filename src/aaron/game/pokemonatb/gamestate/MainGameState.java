@@ -13,6 +13,7 @@ import utils.Tuple;
 import aaron.game.pokemonatb.component.ActiveComponent;
 import aaron.game.pokemonatb.component.AnimationComponent;
 import aaron.game.pokemonatb.component.BackpackComponent;
+import aaron.game.pokemonatb.component.BoxColliderComponent;
 import aaron.game.pokemonatb.component.CameraComponent;
 import aaron.game.pokemonatb.component.InputComponent;
 import aaron.game.pokemonatb.component.InteractibleComponent;
@@ -36,6 +37,7 @@ import aaron.game.pokemonatb.manager.KeyManager;
 import aaron.game.pokemonatb.manager.ResourceManager;
 import aaron.game.pokemonatb.manager.SoundManager;
 import aaron.game.pokemonatb.manager.SystemManager;
+import aaron.game.pokemonatb.system.AABBTestSystem;
 import aaron.game.pokemonatb.system.AnimationSystem;
 import aaron.game.pokemonatb.system.CameraSystem;
 //import aaron.game.pokemonatb.system.CollisionSystem;
@@ -104,6 +106,7 @@ public class MainGameState extends BaseGameState {
 		WarpSystem ws = new WarpSystem(engine);
 		TextRenderSystem trs = new TextRenderSystem(engine);
 		InteractionSystem is = new InteractionSystem(engine);
+		AABBTestSystem ats = new AABBTestSystem(engine);
 		//CollisionSystem cos = new CollisionSystem(engine);
 		
 		engine.addSystem(rs, 997);
@@ -116,6 +119,7 @@ public class MainGameState extends BaseGameState {
 		engine.addSystem(cs, 7);
 		engine.addSystem(ws, 3);
 		engine.addSystem(is, 8);
+		engine.addSystem(ats, 999);
 		SoundManager.getInstance().addClip("Resources\\Sounds\\pallet_town.wav", "music");
 		SoundManager.getInstance().playClip("music", SoundManager.LOOP);
 	}
@@ -161,7 +165,9 @@ public class MainGameState extends BaseGameState {
 		characterEnt.add(new CameraComponent(cameraX, cameraY, cameraSize * 16, cameraSize * 16));
 		characterEnt.add(new StateComponent(State.IDLE));
 		characterEnt.add(new InputComponent());
-		characterEnt.add(new TransformComponent(xTile, yTile, 1f, 180f));
+		TransformComponent transform = new TransformComponent(xTile, yTile, 1f, 180f);
+		characterEnt.add(transform);
+		characterEnt.add(new BoxColliderComponent(16, 16, transform));
 		int animationTime = 8;
 		String animationSheet = "Resources\\Images\\character.png";
 		AnimationComponent animation = new AnimationComponent(animationTime);
